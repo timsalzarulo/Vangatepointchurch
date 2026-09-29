@@ -1,0 +1,20 @@
+{
+  "name": "vantagepoint-leadership-pipeline",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Leadership pipeline, development and volunteer capacity tracker built on Mac Lake's five levels of leadership.",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/server.js",
+    "dev": "node --disable-warning=ExperimentalWarning --watch src/server.js",
+    "seed:demo": "node --disable-warning=ExperimentalWarning scripts/seed-demo.js",
+    "create-admin": "node --disable-warning=ExperimentalWarning scripts/create-admin.js",
+    "test": "node --disable-warning=ExperimentalWarning --test test/*.test.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
