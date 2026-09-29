@@ -10,6 +10,17 @@ A web app for growing leaders and caring for volunteers, built on Mac Lake's fiv
 | 4 | **Leading a Department** | Vision, systems and the leadership bench for a ministry |
 | 5 | **Leading Campus/Church** | Aligning the whole campus or church to one mission |
 
+## Quick start (run it on your computer)
+
+1. Install **Node.js**. Download the **LTS** version from https://nodejs.org and install it with the default settings.
+2. Download this code. On GitHub, click **Code → Download ZIP**, then unzip it.
+3. Double-click the launcher in the unzipped folder:
+   - **Mac:** `Start (Mac).command`. The first time, macOS may say it's from an unidentified developer. If so, right-click the file, choose **Open**, then click **Open** again.
+   - **Windows:** `Start (Windows).bat`. If Windows shows "Windows protected your PC", click **More info → Run anyway**.
+4. Your browser opens to **http://127.0.0.1:3000**. Create your admin login, then go to **Settings → Load example data** to explore.
+
+Keep the black terminal window open while you use the app, and close it to stop. Your data is saved in the `data` folder and will still be there the next time you double-click the launcher.
+
 ## What it does
 
 - **See each person whole.** A profile shows every area they serve in and lead, their pipeline level, who leads them, who they're developing, their training, their check-ins and how their level has changed over time.

@@ -1,5 +1,13 @@
 'use strict';
 
+// Friendly message instead of a crash on Node versions without node:sqlite.
+const [major, minor] = process.versions.node.split('.').map(Number);
+if (major < 22 || (major === 22 && minor < 13)) {
+  console.error(`\nThis app needs Node.js 22.13 or newer (you have ${process.versions.node}).`);
+  console.error('Download the LTS version from https://nodejs.org and try again.\n');
+  process.exit(1);
+}
+
 const path = require('node:path');
 const express = require('express');
 const { openDatabase } = require('./db');
@@ -62,8 +70,16 @@ if (require.main === module) {
   const db = openDatabase();
   const port = Number(process.env.PORT) || 3000;
   const host = process.env.HOST || '127.0.0.1';
-  createApp(db).listen(port, host, () => {
-    console.log(`Leadership pipeline running at http://${host}:${port}`);
+  const server = createApp(db).listen(port, host, () => {
+    console.log(`\nLeadership pipeline is running. Open http://${host}:${port} in your browser.`);
+    console.log('Keep this window open while you use the app. Close it (or press Ctrl+C) to stop.\n');
+  });
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.error(`\nPort ${port} is already in use — the app may already be running.`);
+      console.error(`Try opening http://${host}:${port}, or close the other window first.\n`);
+    } else console.error(err);
+    process.exit(1);
   });
 }
 
