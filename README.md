@@ -15,7 +15,7 @@ A web app for growing leaders and caring for volunteers, built on Mac Lake's fiv
 1. Install **Node.js**. Download the **LTS** version from https://nodejs.org and install it with the default settings.
 2. Download this code. On GitHub, click **Code → Download ZIP**, then unzip it.
 3. Double-click the launcher in the unzipped folder:
-   - **Mac:** `Start (Mac).command`. The first time, macOS may say it's from an unidentified developer. If so, right-click the file, choose **Open**, then click **Open** again.
+   - **Mac:** `Start (Mac).command`. macOS blocks files downloaded from the internet the first time. The simplest way around it: open **Terminal**, type `bash ` (with a space after it), drag the file into the Terminal window, and press Return. Or, to approve it once for double-clicking: try to open it, click **Done**, then go to ** → System Settings → Privacy & Security**, scroll down, and click **Open Anyway**.
    - **Windows:** `Start (Windows).bat`. If Windows shows "Windows protected your PC", click **More info → Run anyway**.
 4. Your browser opens to **http://127.0.0.1:3000**. Create your admin login, then go to **Settings → Load example data** to explore.
 
