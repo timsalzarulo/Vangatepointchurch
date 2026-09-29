@@ -123,3 +123,20 @@ test('CSV import supports dry run, matching and area paths', async (t) => {
 test('csv parser handles quotes, commas and newlines', () => {
   assert.deepEqual(parseCsv('a,b\r\n"x, y","he said ""hi""\nthere"\n'), [['a', 'b'], ['x, y', 'he said "hi"\nthere']]);
 });
+
+test('admins can load and clear example data', async (t) => {
+  const s = await startServer();
+  t.after(() => s.server.close());
+  await s.call('/auth/setup', { method: 'POST', body: { name: 'Admin', email: 'admin@x.org', password: 'longenough123' } });
+  const loaded = await s.call('/example-data', { method: 'POST' });
+  assert.equal(loaded.status, 200);
+  assert.ok(loaded.data.people > 200);
+  assert.equal((await s.call('/example-data', { method: 'POST' })).status, 400);
+  assert.equal((await s.call('/clear-people', { method: 'POST', body: { confirm: 'nope' } })).status, 400);
+  assert.equal((await s.call('/clear-people', { method: 'POST', body: { confirm: 'DELETE' } })).status, 200);
+  assert.equal((await s.call('/people')).data.length, 0);
+  const areas = (await s.call('/areas')).data;
+  assert.equal(areas.length, 1);
+  assert.equal(areas[0].kind, 'church');
+  assert.ok((await s.call('/levels')).data[0].competencies.length > 0);
+});

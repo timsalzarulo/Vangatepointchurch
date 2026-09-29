@@ -327,3 +327,4 @@ input[type=file] { border-style: dashed; }
   .shell { grid-template-columns: 1fr; }
   body { background: #fff; }
 }
+.welcome ul { margin: 0.5rem 0 0; padding-left: 1.2rem; } .welcome li { margin-bottom: 0.4rem; }

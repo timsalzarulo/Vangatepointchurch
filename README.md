@@ -32,12 +32,11 @@ npm start               # http://127.0.0.1:3000
 
 The first time you open the app it asks you to create the admin account.
 
-To try it out with made-up people first:
+### Example data
 
-```bash
-DB_PATH=data/demo.db npm run seed:demo
-DB_PATH=data/demo.db npm start
-```
+To try things out before real names go in, an admin can go to **Settings → Example data → Load example data**. This loads a fictional church: two campuses, five ministries and about 300 made-up volunteers with roles, apprentices, check-ins and ratings. Use it to adjust standards, training and capacity guidelines.
+
+When you're ready for real people, use **Settings → Clear all people & teams**. It removes every person, ministry and team, but keeps your users, settings, levels, standards and training. (You can also load the examples from the command line with `npm run seed:demo`.)
 
 Other commands:
 

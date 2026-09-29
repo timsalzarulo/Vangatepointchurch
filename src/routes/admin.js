@@ -7,6 +7,7 @@ const { DEFAULT_SETTINGS } = require('../db');
 const { parseCsvObjects, toCsv } = require('../csv');
 const { areaPaths, CHILD_KIND } = require('./helpers');
 const { FREQUENCIES } = require('./org');
+const demo = require('../demo');
 
 const ROLES = ['admin', 'editor', 'viewer'];
 
@@ -188,6 +189,20 @@ function register(router, db) {
       }
     });
     res.json(db.settings());
+  });
+
+  // ---- Example data ------------------------------------------------------
+  router.post('/example-data', admin, (_req, res) => {
+    if (db.get('SELECT COUNT(*) AS n FROM people').n > 0) {
+      throw v.bad('Example data can only be loaded when there are no people yet. Clear people & teams first.');
+    }
+    res.json({ people: demo.loadDemo(db) });
+  });
+
+  router.post('/clear-people', admin, (req, res) => {
+    if (req.body.confirm !== 'DELETE') throw v.bad('Type DELETE to confirm.');
+    demo.clearPeopleAndOrg(db);
+    res.json({ ok: true });
   });
 
   // ---- Insights ----------------------------------------------------------

@@ -1,4 +1,4 @@
-import { api, html, mount, stat, riskBadge, levelBadge, flagChips, bar, empty, state, KIND_LABEL } from '../lib.js';
+import { api, html, mount, can, stat, riskBadge, levelBadge, flagChips, bar, empty, state, KIND_LABEL } from '../lib.js';
 
 const FLAG_NAMES = {
   low_capacity: 'Low capacity reported',
@@ -27,6 +27,16 @@ export default async function dashboard({ root }) {
     root,
     html`<header class="page-head"><div><h1>Pipeline health</h1>
       <p class="muted">${state.settings.church_name} · across every ministry, team and leader</p></div></header>
+
+    ${t.people === 0 ? html`<section class="panel welcome">
+      <h2>Welcome! Let’s get started</h2>
+      <p>There are no people in the app yet. You can:</p>
+      <ul>
+        <li><strong>Explore with example data</strong> — ${can.admin() ? html`<a href="#/settings">Settings → Load example data</a>` : 'ask an admin to load it from Settings'}.
+          A fictional church with about 300 volunteers, so you can adjust standards and guidelines before real names go in. Clear it anytime.</li>
+        <li><strong>Review the five levels</strong> on <a href="#/pipeline">Pipeline & Standards</a> and edit the starter standards and training.</li>
+        <li><strong>Add your people</strong> on <a href="#/people">People</a>, or bring in a spreadsheet on <a href="#/data">Import / Export</a>.</li>
+      </ul></section>` : ''}
 
     <section class="stats">
       ${stat('People in the pipeline', t.active + t.onBreak, `${t.onBreak} on break · ${t.inactive} inactive`)}
